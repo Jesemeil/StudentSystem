@@ -1,8 +1,10 @@
+
 version: '3.8'
 
 services:
   mysql:
     image: mysql:8.0
+    container_name: mysql # Optional: Specify a name for the container
     restart: always
     environment:
       MYSQL_DATABASE: full_stack
@@ -18,6 +20,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    container_name: studentsystem # Optional: Specify a name for the container
     restart: always
     ports:
       - "8080:8080"
@@ -30,3 +33,4 @@ services:
 
 volumes:
   mysql_data:
+
