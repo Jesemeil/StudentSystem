@@ -1,4 +1,4 @@
-name: student Pipeline
+name: Student Pipeline
 
 on:
   push:
@@ -19,10 +19,8 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
 
-
       - name: Build with Maven
         run: mvn clean package -DskipTests
-
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
@@ -30,10 +28,9 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
 
-      - name: Build and Push Docker images
+      - name: Build and Push Docker Image
         run: |
           docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/studentsystem:latest .
-
           docker push ${{ secrets.DOCKER_HUB_USERNAME }}/studentsystem:latest
 
   deploy:
@@ -42,7 +39,6 @@ jobs:
     if: github.ref == 'refs/heads/main'
 
     steps:
-
       - name: Checkout Code
         uses: actions/checkout@v3
 

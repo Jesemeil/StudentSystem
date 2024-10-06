@@ -1,12 +1,13 @@
-FROM openjdk:21-jdk-slim as builder
+
+FROM maven:3.8.7-openjdk-21-slim as builder
 
 WORKDIR /app
 
-COPY pom.xml .
 
+COPY pom.xml .
 COPY src ./src
 
-RUN ./mvnw clean package -DskipTests
+RUN mvn clean package -DskipTests
 
 FROM openjdk:21-jdk-slim
 
