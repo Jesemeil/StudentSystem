@@ -15,7 +15,7 @@ public class WebConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/student/**")
-                        .allowedOrigins("http://frontend-student-app-bucket.s3-website-us-east-1.amazonaws.com") // Frontend origin
+                        .allowedOrigins("http://frontend-student-app-bucket.s3-website-us-east-1.amazonaws.com")
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*");
             }
