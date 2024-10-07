@@ -39,10 +39,6 @@ jobs:
     if: github.ref == 'refs/heads/main'
 
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
-      # Step 1: Copy docker-compose.yml to EC2
       - name: Deploy to AWS EC2
         uses: appleboy/ssh-action@v0.1.6
         with:
@@ -52,10 +48,7 @@ jobs:
           port: 22
           script: |
             # Navigate to the project directory
-            cd /path/to/your/docker-compose/directory
-
-            # Copy the latest docker-compose.yml file from GitHub
-            scp docker-compose.yml ubuntu@${{ secrets.AWS_EC2_HOST }}:/path/to/docker-compose/directory
+            cd /home/ubuntu/application
 
             # Pull the latest image from Docker Hub
             docker-compose down
@@ -63,8 +56,6 @@ jobs:
 
             # Bring up the updated Docker containers
             docker-compose up -d --build
-
-
 
 
 #name: Student Pipeline
