@@ -6,7 +6,7 @@ services:
     container_name: mysql
     environment:
       MYSQL_DATABASE: full_stack
-      MYSQL_ROOT_PASSWORD: ${{ ROOT_PASSWORD }}
+      MYSQL_ROOT_PASSWORD: ${ROOT_PASSWORD}
     ports:
       - "3308:3306"
     volumes:
@@ -21,8 +21,8 @@ services:
       - "8080:8080"
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/full_stack?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
-      SPRING_DATASOURCE_USERNAME: ${{ DATASOURCE_USERNAME }}
-      SPRING_DATASOURCE_PASSWORD: ${{ DATASOURCE_PASSWORD }}
+      SPRING_DATASOURCE_USERNAME: ${DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${DATASOURCE_PASSWORD}
     depends_on:
       - mysql
 
