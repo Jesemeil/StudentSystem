@@ -20,7 +20,7 @@ services:
     ports:
       - "8080:8080"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/full_stack?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
       SPRING_DATASOURCE_USERNAME: ${DATASOURCE_USERNAME}
       SPRING_DATASOURCE_PASSWORD: ${DATASOURCE_PASSWORD}
     depends_on:
