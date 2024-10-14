@@ -3,7 +3,6 @@ version: '3.8'
 services:
   mysql:
     image: mysql:8.0.39
-    container_name: mysql
     environment:
       MYSQL_DATABASE: full_stack
       MYSQL_ROOT_PASSWORD: ${ROOT_PASSWORD}
@@ -16,15 +15,79 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: studentsystem
     ports:
-      - "8080:8080"
+      - "8087:8080"
+      - "8088:8080"
     environment:
       SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
       SPRING_DATASOURCE_USERNAME: ${DATASOURCE_USERNAME}
       SPRING_DATASOURCE_PASSWORD: ${DATASOURCE_PASSWORD}
     depends_on:
       - mysql
+    deploy:
+      replicas: 3
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          memory: 1g
+          cpus: '0.5'
+        reservations:
+          memory: 128m
 
 volumes:
   mysql_data:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#version: '3.8'
+#
+#services:
+#  mysql:
+#    image: mysql:8.0.39
+#    container_name: mysql
+#    environment:
+#      MYSQL_DATABASE: full_stack
+#      MYSQL_ROOT_PASSWORD: ${ROOT_PASSWORD}
+#    ports:
+#      - "3308:3306"
+#    volumes:
+#      - mysql_data:/var/lib/mysql
+#
+#  studentsystem:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#    container_name: studentsystem
+#    ports:
+#      - "8080:8080"
+#    environment:
+#      SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
+#      SPRING_DATASOURCE_USERNAME: ${DATASOURCE_USERNAME}
+#      SPRING_DATASOURCE_PASSWORD: ${DATASOURCE_PASSWORD}
+#    depends_on:
+#      - mysql
+#
+#volumes:
+#  mysql_data:
